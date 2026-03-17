@@ -6,6 +6,7 @@
 <a href="#home">Home</a>
 <a href="#sobre">Quem Somos</a>
 <a href="#servicos">Serviços</a>
+<a href="#solar">ETI Solar</a>
 <a href="#protect">ETI Protect</a>
 <a href="#cliente">Área do Cliente</a>
 <a href="#contato">Contato</a>
@@ -53,6 +54,87 @@ Trabalhamos com equipamentos de última geração e suporte especializado, garan
 </div>
 
 </div>
+</section>
+
+<section id="solar">
+<h2 class="title">ETI Solar</h2>
+<p>Soluções completas em energia solar para residências, empresas e propriedades rurais.</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Projeto de Sistema Solar</h3>
+<p>Dimensionamento completo de sistemas fotovoltaicos para reduzir sua conta de energia.</p>
+</div>
+
+<div class="card">
+<h3>Instalação de Sistema Solar</h3>
+<p>Instalação profissional de painéis solares com segurança e alto desempenho.</p>
+</div>
+
+<div class="card">
+<h3>Manutenção de Sistema Solar</h3>
+<p>Manutenção preventiva e corretiva para garantir máxima eficiência do sistema.</p>
+</div>
+
+<div class="card">
+<h3>Consultoria Energética</h3>
+<p>Análise de consumo e viabilidade para implantação de energia solar.</p>
+</div>
+
+<section id="solar-calculadora">
+
+<h2 class="title">Simulador de Energia Solar</h2>
+
+<div class="simulator">
+
+<label>Valor da sua conta de energia (R$)</label>
+<input type="number" id="contaEnergia" placeholder="Ex: 350">
+
+<label>Tipo de instalação</label>
+<select id="tipoLocal">
+<option value="1">Residencial</option>
+<option value="1.2">Comercial</option>
+<option value="1.4">Rural</option>
+</select>
+
+<button class="btn" onclick="simularSolar()">Calcular Economia</button>
+
+<div class="result" id="resultadoSolar"></div>
+
+</div>
+
+</section>
+
+</div>
+
+<br><br>
+
+<a class="btn" href="https://wa.me/5589981451993">
+Solicitar Projeto Solar
+</a>
+
+<div class="simulator">
+
+<h3>Calculadora Solar</h3>
+
+<label>Valor médio da conta de energia (R$)</label>
+<input type="number" id="conta" placeholder="Ex: 300">
+
+<label>Cidade / Região</label>
+<select id="cidade">
+<option value="1">Tocantins</option>
+<option value="0.9">Outras regiões</option>
+</select>
+
+<button class="btn" onclick="calcularSolar()">Calcular Sistema</button>
+
+<div class="result" id="resultadoCalcSolar">
+Resultado aparecerá aqui
+</div>
+
+</div>
+
 </section>
 
 <section class="protect" id="protect">
@@ -195,6 +277,68 @@ document.getElementById('cams').addEventListener('input',calcular)
 document.getElementById('plan').addEventListener('change',calcular)
 
 </script>
+<script>
 
+function calcular(){
+let cams = document.getElementById('cams').value
+let plano = document.getElementById('plan').value
+
+document.getElementById('resultado').innerText =
+"Valor mensal: R$" + plano
+}
+
+function calcularSolar(){
+
+let conta = document.getElementById("conta").value
+
+if(conta == ""){
+document.getElementById("resultadoCalcSolar").innerText =
+"Digite o valor da conta."
+return
+}
+
+let economia = conta * 0.95
+let paineis = Math.ceil(conta / 120)
+
+document.getElementById("resultadoCalcSolar").innerHTML =
+"🔋 Sistema recomendado: " + paineis + " painéis solares <br><br>" +
+"💰 Economia mensal estimada: R$ " + economia.toFixed(2) + "<br><br>" +
+"📈 Economia em 5 anos: R$ " + (economia*60).toFixed(2)
+
+}
+
+function simularSolar(){
+
+let conta = document.getElementById("contaEnergia").value
+
+if(conta == ""){
+document.getElementById("resultadoSolar").innerHTML =
+"Digite o valor da conta de energia."
+return
+}
+
+let consumo = conta / 0.85
+let paineis = Math.ceil(consumo / 75)
+let potencia = (paineis * 550) / 1000
+let economiaMensal = conta * 0.95
+let economia25anos = economiaMensal * 300
+
+document.getElementById("resultadoSolar").innerHTML =
+"⚡ Consumo estimado: " + consumo.toFixed(0) + " kWh/mês <br><br>" +
+"☀ Sistema recomendado: " + potencia.toFixed(2) + " kWp <br><br>" +
+"🔋 Quantidade de painéis: " + paineis + "<br><br>" +
+"💰 Economia mensal: R$ " + economiaMensal.toFixed(2) + "<br><br>" +
+"📈 Economia em 25 anos: R$ " + economia25anos.toFixed(2)
+
+}
+
+document.getElementById('cams').addEventListener('input',calcular)
+document.getElementById('plan').addEventListener('change',calcular)
+
+</script>
+
+</script>
+
+</script>
 </body>
 </html>
